@@ -1,0 +1,88 @@
+const sabji = [
+  {
+    id: 1,
+    name: "Paneer Butter Masala",
+    image: "/sabji/paneerbuttermasala.jpeg",
+     price:450,
+    quantity:1 ,
+  },
+  {
+    id: 2,
+    name: "Dal Makhni",
+    image: "/sabji/dalmakhni.jpg",
+     price:350,
+    quantity:1 ,
+  },
+  {
+    id: 3,
+    name: "Kadai Paneer",
+    image: "/sabji/kadaipaneer.jpg",
+     price:380,
+    quantity:1 ,
+  },
+  {
+    id: 4,
+    name: "Palak Paneer",
+    image: "/sabji/palakpaneer.webp",
+     price:350,
+    quantity:1 ,
+  },
+  {
+    id: 5,
+    name: "Chole Masala",
+    image: "/sabji/cholemasala.avif",
+     price:280,
+    quantity:1 ,
+  },
+  {
+    id: 6,
+    name: "Aaloo Gobhi",
+    image: "/sabji/aloogobhi.jpg",
+     price:200,
+    quantity:1 ,
+  },
+  {
+    id: 7,
+    name: "Bhindi Masala",
+    image: "/sabji/bhindimasala.jpg",
+     price:160,
+    quantity:1 ,
+  },
+  {
+    id: 8,
+    name: "Mix Veg",
+    image: "/sabji/mixveg.jpeg",
+     price:230,
+    quantity:1 ,
+  },
+  {
+    id: 9,
+    name: "Gajar Matar",
+    image: "/sabji/gajarmatar.jpeg",
+     price:220,
+    quantity:1 ,
+  },
+  {
+    id: 10,
+    name: "Baingan Bharta",
+    image: "/sabji/bainganbharta.jpg",
+     price:230,
+    quantity:1 ,
+  },
+  {
+    id: 11,
+    name: "Dal Butter Fry",
+    image: "/sabji/dalmakhni.jpg",
+     price:270,
+    quantity:1 ,
+  },
+  {
+    id: 12,
+    name: "Veg Kofta",
+    image: "/sabji/vegkofta.webp",
+     price:320,
+    quantity:1 ,
+  },
+];
+
+export default sabji;
