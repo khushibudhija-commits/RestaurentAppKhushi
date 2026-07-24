@@ -1,8 +1,9 @@
 import { ShoppingCart, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-const EmptyCart = ({ theme }) => {
+const EmptyCart = () => {
   const navigate = useNavigate();
+  const { theme } = useOutletContext();
   const isDark = theme === "dark";
 
   return (
@@ -51,7 +52,7 @@ const EmptyCart = ({ theme }) => {
           Browse our delicious menu and add items to your cart.
         </p>
         <button
-          onClick={() => navigate("/menu")}
+          onClick={() => navigate("/home/menu")}
           className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl bg-[#D6B56C] text-black hover:bg-[#c9a75a]"
         >
           <ArrowLeft size={18} />

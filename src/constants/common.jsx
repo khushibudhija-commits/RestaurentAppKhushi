@@ -12,7 +12,7 @@ const Common = () => {
   const user = JSON.parse(localStorage.getItem("customer"));
 
   useEffect(() => {
-    console.log(user, "SDFS")
+    // console.log(user, "SDFS")
     customerlogin(user);
   }, []);
   

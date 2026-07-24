@@ -59,7 +59,7 @@ export default function Footer({ theme = "light" }) {
 
           <div className="flex flex-col  gap-2">
         <Link
-          to="/"
+          to="/home"
           className={`rounded-xl px-2 py-1  font-semibold
              tracking-wide transition-all duration-300
           ${
@@ -72,7 +72,7 @@ export default function Footer({ theme = "light" }) {
         </Link>
 
         <Link
-          to="/about"
+          to="/home/about"
           className={`rounded-xl px-2 py-1 font-semibold tracking-wide transition-all duration-300
           ${
             isDark
@@ -84,7 +84,7 @@ export default function Footer({ theme = "light" }) {
         </Link>
 
         <Link
-          to="/booking"
+          to="/home/booking"
           className={`rounded-xl px-2 py-1  font-semibold tracking-wide transition-all duration-300
           ${
             isDark
@@ -96,7 +96,7 @@ export default function Footer({ theme = "light" }) {
         </Link>
 
         <Link
-          to="/contact"
+          to="/home/contact"
           className={`rounded-xl px-2 py-1  font-semibold tracking-wide transition-all duration-300
           ${
             isDark
@@ -107,7 +107,7 @@ export default function Footer({ theme = "light" }) {
           Contact
         </Link>
         <Link
-          to="/menu"
+          to="/home/menu"
           className={`rounded-xl px-2 py-1 font-semibold tracking-wide transition-all duration-300
           ${
             isDark
@@ -161,19 +161,7 @@ export default function Footer({ theme = "light" }) {
             </div>
           </div>
 
-          {/* Social Icons */}
           <div className="flex gap-4 mt-8">
-            {/* <div className="p-3 rounded-full bg-[#D6B56C] text-black hover:scale-110 transition cursor-pointer">
-              <Facebook size={18} />
-            </div> */}
-
-            {/* <div className="p-3 rounded-full bg-[#D6B56C] text-black hover:scale-110 transition cursor-pointer">
-              <Instagram size={18} />
-            </div> */}
-
-            {/* <div className="p-3 rounded-full bg-[#D6B56C] text-black hover:scale-110 transition cursor-pointer">
-              <Twitter size={18} />
-            </div> */}
           </div>
         </div>
       </div>

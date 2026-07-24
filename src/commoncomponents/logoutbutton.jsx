@@ -32,12 +32,12 @@ const navigate = useNavigate();
 
               <button
   onClick={() => {
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("user");
+    localStorage.removeItem("customerToken");
+    localStorage.removeItem("customer");
     
 alert("logged out successfully")
     setIsOpen(false);
-    navigate("/login");
+    navigate("/");
 
   }}
   className="rounded-lg bg-blue-600 px-4 py-2 text-white"

@@ -1,213 +1,328 @@
+
 import { useState } from "react";
-import { Eye, EyeOff, Mail, Lock, LogIn } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  LogIn,
+  UserPlus,
+} from "lucide-react";
 import { Outlet, useNavigate } from "react-router-dom";
 import useAuthStore from "../store/customerlogin";
 
-const CustomerLogin = ({ theme }) => {
+const CustomerLogin = ({ theme = "light" }) => {
   const navigate = useNavigate();
 
   const isDark = theme === "dark";
+
+  const customerlogin = useAuthStore(
+    (state) => state.customerlogin
+  );
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
+
   const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState("");
 
-const customerlogin = useAuthStore((state) => state.customerlogin);
   const onSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    setLoading(true);
-    setError("");
-    const response = await fetch("http://localhost:7000/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    e.preventDefault();
 
+    try {
+      setLoading(true);
+      setError("");
 
-    const result = await response.json();
-    if (!response.ok) {
-      setError(result.message || "Invalid email or password");
-      return;
+      const response = await fetch(
+        "https://restaurent-app-backend.onrender.com/api/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.message || "Invalid email or password");
+        return;
+      }
+
+      localStorage.setItem(
+        "customerToken",
+        result.token
+      );
+
+      localStorage.setItem(
+        "customer",
+        JSON.stringify(result.data)
+      );
+
+      customerlogin(result.data);
+
+      navigate("/home");
+      
+      // alert("Login Successful 🎉");
+    } catch (err) {
+      setError("Server error. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-
-    localStorage.setItem("customerToken", result.token);
-    localStorage.setItem("customer", JSON.stringify(result.data));
-
-
-    // alert("Login Successful 🎉");
-customerlogin(result.data);
- navigate("/home");
-  }
-   catch (err) {
-    setError("Server error. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <section
-      className={`min-h-screen flex items-center justify-center px-6 transition-all duration-300 ${
-        isDark
-          ? "bg-[#0f172a]"
-          : "bg-gradient-to-br from-orange-100 via-white to-yellow-100"
-      }`}
+      className="min-h-screen bg-cover bg-center bg-no-repeat relative flex items-center justify-center px-6 py-8"
+      style={{
+        backgroundImage: "url('/logo-dark.png')",
+      }}
     >
-     <form
-  onSubmit={onSubmit}
-  className={`w-full max-w-md rounded-3xl shadow-2xl p-8 transition duration-300 ${
-    isDark
-      ? "bg-[#171717] border border-gray-700"
-      : "bg-white border border-gray-200"
-  }`}
->
-        <div className="flex justify-center mb-5">
-          <div className="w-20 h-20 rounded-full bg-[#D6B56C] flex items-center justify-center">
-            <LogIn className="text-white" size={35} />
-          </div>
-        </div>
+      <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]" />
 
-        <h1
-          className={`text-3xl font-bold text-center ${
-            isDark ? "text-white" : "text-[#3c2415]"
-          }`}
-        >
-          Welcome Back
-        </h1>
+      <div
+        className={`relative z-10 w-full max-w-md rounded-[32px] overflow-hidden shadow-[0_20px_70px_rgba(0,0,0,.45)] backdrop-blur-xl transition-all duration-500 ${
+          isDark
+            ? "bg-[#171717]/95 border border-gray-700"
+            : "bg-white/90 border border-white/30"
+        }`}
+      >
+        <div className="h-2 w-full bg-gradient-to-r from-[#D6B56C] via-[#F5D98B] to-[#D6B56C]" />
 
-        <p
-          className={`text-center mt-2 mb-8 ${
-            isDark ? "text-gray-400" : "text-gray-500"
-          }`}
-        >
-          Login to continue your food journey.
-        </p>
-        <div className="mb-5">
-          <label
-            className={`font-semibold ${
-              isDark ? "text-[#D6B56C]" : "text-[#3c2415]"
-            }`}
-          >
-            Email
-          </label>
+        <div className="px-8 py-8">
 
-          <div className="relative mt-2">
-            <Mail
-              size={20}
-              className={`absolute left-3 top-3 ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-            />
-
-            <input
-              type="email"
-              placeholder="Enter Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={`w-full pl-11 pr-4 py-3 rounded-xl border outline-none ${
-                isDark
-                  ? "bg-[#222] border-gray-600 text-white"
-                  : "bg-white border-gray-300"
-              }`}
+          <div className="flex justify-center">
+            <img
+              src={isDark ? "/logo-dark.png" : "/logo.png"}
+              alt="logo"
+              className="w-24 object-contain drop-shadow-xl"
             />
           </div>
-        </div>
-        <div className="mb-3">
-          <label
-            className={`font-semibold ${
-              isDark ? "text-[#D6B56C]" : "text-[#3c2415]"
+
+          <div className="flex justify-center mt-4">
+            <div className="w-20 h-20 rounded-full bg-[#D6B56C] flex items-center justify-center shadow-xl">
+              <LogIn
+                size={36}
+                className="text-black"
+              />
+            </div>
+          </div>
+
+
+          <h1
+            className={`mt-6 text-center text-4xl font-bold ${
+              isDark
+                ? "text-[#D6B56C]"
+                : "text-[#3c2415]"
             }`}
           >
-            Password
-          </label>
+            Welcome Back 👋
+          </h1>
 
-          <div className="relative mt-2">
-            <Lock
-              size={20}
-              className={`absolute left-3 top-3 ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-            />
+          <p
+            className={`mt-3 mb-8 text-center ${
+              isDark
+                ? "text-gray-400"
+                : "text-gray-600"
+            }`}
+          >
+            Login to continue your premium dining experience.
+          </p>
 
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`w-full pl-11 pr-12 py-3 rounded-xl border outline-none ${
-                isDark
-                  ? "bg-[#222] border-gray-600 text-white"
-                  : "bg-white border-gray-300"
-              }`}
-            />
+          <form onSubmit={onSubmit}>
+            <div className="mb-5">
+              <label
+                className={`block mb-2 font-semibold ${
+                  isDark
+                    ? "text-[#D6B56C]"
+                    : "text-[#3c2415]"
+                }`}
+              >
+                Email Address
+              </label>
+
+              <div className="relative">
+                <Mail
+                  size={20}
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-500"
+                  }`}
+                />
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) =>
+                    setEmail(e.target.value)
+                  }
+                  required
+                  className={`w-full pl-12 pr-4 py-4 rounded-2xl outline-none border transition-all duration-300
+                  focus:ring-2 focus:ring-[#D6B56C]
+                  ${
+                    isDark
+                      ? "bg-[#1f1f1f] border-gray-600 text-white placeholder-gray-500"
+                      : "bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-400"
+                  }`}
+                />
+              </div>
+            </div>
+
+            <div className="mb-3">
+              <label
+                className={`block mb-2 font-semibold ${
+                  isDark
+                    ? "text-[#D6B56C]"
+                    : "text-[#3c2415]"
+                }`}
+              >
+                Password
+              </label>
+
+              <div className="relative">
+                <Lock
+                  size={20}
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-500"
+                  }`}
+                />
+
+                <input
+                  type={
+                    showPassword
+                      ? "text"
+                      : "password"
+                  }
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) =>
+                    setPassword(e.target.value)
+                  }
+                  required
+                  className={`w-full pl-12 pr-12 py-4 rounded-2xl outline-none border transition-all duration-300
+                  focus:ring-2 focus:ring-[#D6B56C]
+                  ${
+                    isDark
+                      ? "bg-[#1f1f1f] border-gray-600 text-white placeholder-gray-500"
+                      : "bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-400"
+                  }`}
+                />
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword(!showPassword)
+                  }
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                >
+                  {showPassword ? (
+                    <EyeOff
+                      size={20}
+                      className={
+                        isDark
+                          ? "text-gray-300"
+                          : "text-gray-600"
+                      }
+                    />
+                  ) : (
+                    <Eye
+                      size={20}
+                      className={
+                        isDark
+                          ? "text-gray-300"
+                          : "text-gray-600"
+                      }
+                    />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            
+        
+
+            {error && (
+              <div className="mb-5 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-red-600 text-sm font-medium">
+                {error}
+              </div>
+            )}            
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 rounded-2xl bg-[#3c2415] text-white text-lg font-bold transition-all duration-300 hover:scale-[1.02] hover:bg-[#2b1b11] hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {loading ? "Logging In..." : "Login"}
+            </button>
+
+
+            <div className="flex items-center my-8">
+              <div className="flex-1 h-px bg-gray-300" />
+
+              <span
+                className={`px-4 font-semibold ${
+                  isDark
+                    ? "text-gray-400"
+                    : "text-gray-500"
+                }`}
+              >
+                OR
+              </span>
+
+              <div className="flex-1 h-px bg-gray-300" />
+            </div>
 
             <button
               type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-3"
+              onClick={() =>
+                navigate("/registercustomer")
+              }
+              className={`w-full rounded-2xl border py-4 font-semibold flex items-center justify-center gap-3 transition-all duration-300 ${
+                isDark
+                  ? "border-[#D6B56C] text-[#D6B56C] hover:bg-[#D6B56C] hover:text-black"
+                  : "border-[#3c2415] text-[#3c2415] hover:bg-[#3c2415] hover:text-white"
+              }`}
             >
-              {showPassword ? (
-                <EyeOff
-                  size={20}
-                  className={isDark ? "text-white" : "text-gray-700"}
-                />
-              ) : (
-                <Eye
-                  size={20}
-                  className={isDark ? "text-white" : "text-gray-700"}
-                />
-              )}
+              <UserPlus size={20} />
+              Create New Account
             </button>
-          </div>
+
+            <p
+              className={`text-center mt-6 text-sm ${
+                isDark
+                  ? "text-gray-500"
+                  : "text-gray-600"
+              }`}
+            >
+              Enjoy delicious meals, reserve tables,
+              and experience premium dining with
+              <span className="font-semibold text-[#D6B56C]">
+                {" "}
+                The Seasons Restaurant
+              </span>
+              .
+            </p>
+
+          </form>
         </div>
+      </div>
 
-        <div className="flex justify-end mb-5">
-          <button
-            onClick={() => navigate("/forgotpassword")}
-            className="text-[#D6B56C] hover:underline"
-          >
-            Forgot Password?
-          </button>
-        </div>
-        {error && (
-          <div className="bg-red-100 text-red-600 rounded-lg p-3 mb-5">
-            {error}
-          </div>
-        )}
-
-        <button 
-        //   disabled={loading}
-        type="submit"
-          className="w-full py-3 rounded-xl font-semibold text-white bg-[#D6B56C] hover:opacity-90 transition"
-        >
-          {/* {loading ? "Logging in..." : "Login"} */}
-          Login
-        </button>
-
-        <div className="mt-6 text-center">
-          <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-            Don't have an account?
-          </span>
-
-          <button
-            onClick={() => navigate("/registercustomer")}
-            className="text-[#D6B56C] hover:underline"
-          >
-            Register
-          </button>
-        </div>
-      </form>
-          <Outlet />
-      </section>
+      <Outlet />
+    </section>
   );
 };
 
 export default CustomerLogin;
+          

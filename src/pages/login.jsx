@@ -125,9 +125,9 @@ const Login = () => {
       </div>
 
       {/* Popup */}
-    {showPopup && (
+    {/* {showPopup && (
       <Usertype onClose={() => setShowPopup(false)} />
-    )}
+    )} */}
     </div>
   );
 };
