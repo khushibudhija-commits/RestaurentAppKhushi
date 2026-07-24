@@ -57,7 +57,7 @@ const Login = () => {
       setError("Password must be at least 6 characters.");
       return;
     }
-    fetch("https://restraunt-app-backend.onrender.com/api/admins/login", {
+    fetch("http://localhost:7000/api/admins/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

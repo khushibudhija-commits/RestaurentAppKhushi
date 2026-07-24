@@ -37,7 +37,7 @@ const CustomerLogin = ({ theme = "light" }) => {
       setError("");
 
       const response = await fetch(
-        "https://restaurent-app-backend.onrender.com/api/users/login",
+        "http://localhost:7000/api/users/login",
         {
           method: "POST",
           headers: {

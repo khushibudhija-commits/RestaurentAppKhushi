@@ -87,7 +87,7 @@ const RegisterCustomer = ({ theme = "light" }) => {
       setError("");
 
       const response = await fetch(
-        "https://restaurent-app-backend.onrender.com/api/users/register",
+        "http://localhost:7000/api/users/register",
         {
           method: "POST",
           headers: {

@@ -14,7 +14,7 @@ useEffect(() => {
   const fetchMenu = async () => {
     try {
       const response = await fetch(
-        "https://restaurent-app-backend.onrender.com/api/categories/getAllCategories"
+        "http://localhost:7000/api/categories/getAllCategories"
       );
       const result = await response.json();
       if (!response.ok) {

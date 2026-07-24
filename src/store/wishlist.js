@@ -11,7 +11,7 @@ const useWishlistStore = create(
         if (!user?._id) return;
         try {
           const response = await fetch(
-            `https://restaurent-app-backend.onrender.com/api/wishlist/user/${user._id}`
+            `http://localhost:7000/api/wishlist/user/${user._id}`
           );
           const result = await response.json();
           if (response.ok && result.data) {
@@ -36,7 +36,7 @@ const useWishlistStore = create(
         const user = JSON.parse(localStorage.getItem("customer"));
         if (user?._id) {
           try {
-            await fetch("https://restaurent-app-backend.onrender.com/api/wishlist/add", {
+            await fetch("http://localhost:7000/api/wishlist/add", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -65,7 +65,7 @@ const useWishlistStore = create(
         const user = JSON.parse(localStorage.getItem("customer"));
         if (user?._id) {
           try {
-            await fetch("https://restaurent-app-backend.onrender.com/api/wishlist/remove", {
+            await fetch("http://localhost:7000/api/wishlist/remove", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -91,7 +91,7 @@ const useWishlistStore = create(
         const user = JSON.parse(localStorage.getItem("customer"));
         if (user?._id) {
           try {
-            await fetch(`https://restaurent-app-backend.onrender.com/api/wishlist/user/${user._id}`, {
+            await fetch(`http://localhost:7000/api/wishlist/user/${user._id}`, {
               method: "DELETE",
             });
           } catch (err) {

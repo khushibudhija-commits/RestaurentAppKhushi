@@ -64,7 +64,7 @@ const CustomerDashboard = () => {
       setLoadingBookings(true);
       try {
         const response = await fetch(
-          `https://restaurent-app-backend.onrender.com/api/bookings/user/${user._id}?page=${historyPage}&limit=4`
+          `http://localhost:7000/api/bookings/user/${user._id}?page=${historyPage}&limit=4`
         );
         const result = await response.json();
         if (response.ok && result.data) {
@@ -88,7 +88,7 @@ const CustomerDashboard = () => {
       setLoadingOrders(true);
       try {
         const response = await fetch(
-          `https://restaurent-app-backend.onrender.com/api/orders/user/${user._id}?page=${orderPage}&limit=4`
+          `http://localhost:7000/api/orders/user/${user._id}?page=${orderPage}&limit=4`
         );
         const result = await response.json();
         if (response.ok && result.data) {

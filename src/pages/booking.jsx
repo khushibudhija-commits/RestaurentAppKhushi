@@ -106,7 +106,7 @@ const Booking = () => {
     setLoadingTables(true);
     try {
       const response = await fetch(
-        "https://restaurent-app-backend.onrender.com/api/bookings/getcollections"
+        "http://localhost:7000/api/bookings/getcollections"
       );
       const result = await response.json();
       if (response.ok && result.data) {
@@ -134,7 +134,7 @@ const Booking = () => {
     setLoadingHistory(true);
     try {
       const response = await fetch(
-        `https://restaurent-app-backend.onrender.com/api/bookings/user/${user._id}?page=${page}&limit=5`
+        `http://localhost:7000/api/bookings/user/${user._id}?page=${page}&limit=5`
       );
       const result = await response.json();
       if (response.ok && result.data) {
@@ -174,7 +174,7 @@ const Booking = () => {
     setSubmitting(true);
     try {
       const response = await fetch(
-        "https://restaurent-app-backend.onrender.com/api/bookings/bookTable",
+        "http://localhost:7000/api/bookings/bookTable",
         {
           method: "POST",
           headers: {
