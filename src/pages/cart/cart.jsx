@@ -43,7 +43,7 @@ const Cart = ({ theme }) => {
     setLoadingHistory(true);
     try {
       const response = await fetch(
-        `https://restaurent-app-backend.onrender.com/api/orders/user/${user._id}?page=${page}&limit=4`
+        `http://localhost:7000/api/orders/user/${user._id}?page=${page}&limit=4`
       );
       const result = await response.json();
       if (response.ok && result.data) {
@@ -84,7 +84,7 @@ const Cart = ({ theme }) => {
         image: item.image || "/picture1.jpg",
       }));
 
-      const response = await fetch("https://restaurent-app-backend.onrender.com/api/orders/create", {
+      const response = await fetch("http://localhost:7000/api/orders/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
