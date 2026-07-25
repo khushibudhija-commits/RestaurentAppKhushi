@@ -76,6 +76,10 @@ const router = createBrowserRouter([
             element: <About />,
           },
           {
+            path: "/home/customerdashboard",
+            element: <CustomerDashboard />,
+          },
+          {
             path: "/home",
             element: <Home />,
           },
@@ -95,6 +99,7 @@ const router = createBrowserRouter([
             path: "/home/menu",
             element: <Menu />,
           },
+          
            {
             path: "/home/wishlist",
             element: <Wishlist />,
@@ -143,6 +148,8 @@ const router = createBrowserRouter([
             path: "cartSummary",
             element: <CartSummary />,
           },
+          
+          
         ],
       },
     ],

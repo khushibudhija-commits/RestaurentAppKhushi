@@ -74,11 +74,11 @@ const Sabji = () => {
   useEffect(() => {
     const fetchSubcategories = async () => {
       try {
-        const response = await fetch("http://localhost:7000/api/subcategories/getAll");
+        const response = await fetch("https://restraunt-app-backend.onrender.com/api/subcategories/getAll");
         const result = await response.json();
         if (response.ok && result.data) {
           const filtered = result.data.filter(
-            (sub) => sub.category?.name?.toUpperCase() === "CLASSIC INDIAN SABJI"
+            (sub) => sub.category?.name?.toUpperCase() === "CLASSIC INDIAN SABJI COLLECTION"
           );
           const formatted = filtered.map((sub) => ({
             id: String(sub._id),
@@ -86,11 +86,12 @@ const Sabji = () => {
             image: sub.image.startsWith("http")
               ? sub.image
               : sub.image.startsWith("/uploads") || sub.image.startsWith("uploads")
-              ? `http://localhost:7000${sub.image.startsWith("/") ? "" : "/"}${sub.image}`
+              ? `https://restraunt-app-backend.onrender.com${sub.image.startsWith("/") ? "" : "/"}${sub.image}`
               : sub.image,
             price: Number(sub.prices || 0),
             quantity: sub.quantity || 1,
           }));
+          console.log(formatted, 'formatted')
           setItems(formatted);
         }
       } catch (err) {

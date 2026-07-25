@@ -1,23 +1,9 @@
-// export default function Footer({ theme = 'light' }) {
-//     const isDark = theme === 'dark';
 
-//     return (
-//         <footer className={`py-16 px-8 transition-colors duration-500 ${isDark ? 'bg-[#0f172a] text-white' : 'bg-[#fdf8f0] text-[#3c2415]'}`}>
-//             <div className={`mt-12 pt-6 text-center ${isDark ? 'border-gray-700 text-gray-400' : 'border-[#e7d6b3] text-gray-600'}`}>
-//                 © {new Date().getFullYear()} The Seasons Restaurant. All Rights Reserved.
-//             </div>
-//         </footer>
-//     );
-// }
-// import Home from '../pages/home'
 import {
   MapPin,
   Phone,
   Mail,
   Clock,
-//   Facebook,
-//   Instagram,
-//   Twitter,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -32,10 +18,8 @@ export default function Footer({ theme = "light" }) {
           : "bg-[#fdf8f0] text-[#3c2415]"
       }`}
     >
-      {/* Top Section */}
       <div className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         
-        {/* Restaurant Info */}
         <div>
           <h2 className="text-3xl font-bold text-[#D6B56C] mb-4">
             The Seasons
@@ -51,7 +35,6 @@ export default function Footer({ theme = "light" }) {
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h3 className="text-xl font-semibold mb-5 text-[#D6B56C] ">
             Quick Links
@@ -120,7 +103,6 @@ export default function Footer({ theme = "light" }) {
 </div>
         </div>
 
-        {/* Contact */}
         <div>
           <h3 className="text-xl font-semibold mb-5 text-[#D6B56C]">
             Contact Us
@@ -144,7 +126,6 @@ export default function Footer({ theme = "light" }) {
           </div>
         </div>
 
-        {/* Opening Hours */}
         <div>
           <h3 className="text-xl font-semibold mb-5 text-[#D6B56C]">
             Opening Hours
@@ -153,12 +134,10 @@ export default function Footer({ theme = "light" }) {
           <div className="space-y-3">
             <div className="flex gap-3">
               <Clock size={18} className="text-[#D6B56C]" />
-              <span>Mon - Fri : 10:00 AM - 10:00 PM</span>
+              <span>Mon - Fri : 9:00 AM - 8:00 PM</span>
             </div>
 
-            <div className="pl-8">
-              Sat - Sun : 9:00 AM - 11:30 PM
-            </div>
+           
           </div>
 
           <div className="flex gap-4 mt-8">
@@ -166,7 +145,6 @@ export default function Footer({ theme = "light" }) {
         </div>
       </div>
 
-      {/* Bottom */}
       <div
         className={`border-t ${
           isDark ? "border-gray-700" : "border-[#e7d6b3]"
@@ -178,19 +156,34 @@ export default function Footer({ theme = "light" }) {
             Reserved.
           </p>
 
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <span className="hover:text-[#D6B56C] cursor-pointer transition">
-              Privacy Policy
-            </span>
+          <div className="flex gap-6 mt-4 md:mt-0 flex-wrap justify-center">
+  <a
+    href="https://policies.google.com/privacy"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-[#D6B56C] transition"
+  >
+    Privacy Policy
+  </a>
 
-            <span className="hover:text-[#D6B56C] cursor-pointer transition">
-              Terms & Conditions
-            </span>
+  <a
+    href="https://policies.google.com/terms"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-[#D6B56C] transition"
+  >
+    Terms & Conditions
+  </a>
 
-            <span className="hover:text-[#D6B56C] cursor-pointer transition">
-              FAQ
-            </span>
-          </div>
+  <a
+    href="https://support.google.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-[#D6B56C] transition"
+  >
+    FAQ
+  </a>
+</div>
         </div>
       </div>
     </footer>

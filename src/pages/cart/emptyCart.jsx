@@ -1,4 +1,4 @@
-import { ShoppingCart, ArrowLeft } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 const EmptyCart = () => {
@@ -10,10 +10,8 @@ const EmptyCart = () => {
     <section
       className={`min-h-screen flex items-center justify-center
         cursor-pointer px-6 py-20 transition-all duration-500 ${
-        isDark
-          ? "bg-[#0f172a] text-white"
-          : "bg-[#fdf8f0] text-[#3c2415]"
-      }`}
+          isDark ? "bg-[#0f172a] text-white" : "bg-[#fdf8f0] text-[#3c2415]"
+        }`}
     >
       <div
         className={`max-w-lg w-full rounded-3xl border shadow-2xl text-center p-10 transition-all duration-500 ${
@@ -51,13 +49,22 @@ const EmptyCart = () => {
           <br />
           Browse our delicious menu and add items to your cart.
         </p>
-        <button
-          onClick={() => navigate("/home/menu")}
-          className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl bg-[#D6B56C] text-black hover:bg-[#c9a75a]"
-        >
-          <ArrowLeft size={18} />
-          Browse Menu
-        </button>
+        <div className="flex justify-center w-full gap-2 items-center">
+          <button
+            onClick={() => navigate("/home/menu")}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl bg-[#D6B56C] text-black hover:bg-[#c9a75a]"
+          >
+            Browse Menu
+          </button>
+          <button
+            onClick={() => navigate("/home/customerdashboard")}
+            className="inline-flex items-center gap-2 px-8 py-3
+           rounded-full font-semibold transition-all duration-300 hover:scale-105
+            hover:shadow-xl bg-[#328f96] text-black hover:bg-[#328f96]"
+          >
+            Cart history
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -10,9 +10,10 @@ import useWishlistStore from "../store/wishlist";
 const Header = ({ theme, toggleTheme }) => {
   const isDark = theme === "dark";
   const [open, setOpen] = useState(false);
-const wishlistItems = useWishlistStore((state) => state.wishlistItems);
+  const wishlistItems = useWishlistStore((state) => state.wishlistItems);
   const navigate = useNavigate();
   const cartItems = useCartStore((state) => state.cartItems);
+  const user = JSON.parse(localStorage.getItem("customer"));
 
   return (
     <div
@@ -28,7 +29,6 @@ const wishlistItems = useWishlistStore((state) => state.wishlistItems);
         className={`flex items-center gap-4 justify-between text-sm tracking-widest uppercase 
       ${isDark ? "text-[#E4C590]" : "text-[#8a4b12]"}`}
       >
-        {/* Desktop nav */}
         <nav className="hidden md:flex flex-row p-2 gap-2">
           <Link
             to="/home"
@@ -90,7 +90,6 @@ const wishlistItems = useWishlistStore((state) => state.wishlistItems);
           </Link>
         </nav>
 
-        {/* Mobile menu button */}
         <button
           onClick={() => setOpen((s) => !s)}
           className={`md:hidden flex flex-col justify-center items-center gap-1 p-2 rounded focus:outline-none focus:ring-2 transition-colors duration-200 ${isDark ? "text-[#E4C590]" : "text-[#8a4b12]"}`}
@@ -160,6 +159,19 @@ const wishlistItems = useWishlistStore((state) => state.wishlistItems);
           {isDark ? <Sun size={20} /> : <Moon size={20} />}
         </button>
 
+        {user?.name && (
+          <span
+            onClick={() => navigate("/home/customerdashboard")}
+            className={`hidden sm:inline-block font-extrabold text-sm
+               pr-3  cursor-pointer 
+               transition ${
+              isDark ? " text-[#E4C590] hover:text-white" : " text-[#8a4b12] hover:text-[#5f2f0d]"
+            }`}
+          >
+            👋 Hi, {user.name}
+          </span>
+        )}
+
         <div
           className={`flex items-center gap-2 transition duration-300 
           cursor-pointer ${isDark ? "hover:text-white" : "hover:text-[#5f2f0d]"}`}
@@ -172,6 +184,19 @@ const wishlistItems = useWishlistStore((state) => state.wishlistItems);
       {open && (
         <div className={`md:hidden absolute top-full left-0 right-0 z-50 p-4 transition-all duration-200 ${isDark ? "bg-[#111827] text-[#E4C590]" : "bg-[#fffaf1] text-[#8a4b12]"}`}>
           <nav className="flex flex-col gap-2">
+            {user?.name && (
+              <div
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/home/customerdashboard");
+                }}
+                className={`px-4 py-3 font-extrabold tracking-wide border-b pb-3 mb-2 cursor-pointer ${
+                  isDark ? "border-[#E4C590]/20 text-[#E4C590]" : "border-[#8a4b12]/20 text-[#8a4b12]"
+                }`}
+              >
+                👋 Hi, {user.name}
+              </div>
+            )}
             <Link to="/home" onClick={() => setOpen(false)} className={`rounded-xl px-4 py-3 font-semibold tracking-wide transition-all duration-200 ${isDark ? "text-[#D6B56C] hover:bg-[#D6B56C] hover:text-black" : "text-amber-900 hover:bg-amber-700 hover:text-white"}`}>
               Home
             </Link>

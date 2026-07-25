@@ -14,7 +14,7 @@ useEffect(() => {
   const fetchMenu = async () => {
     try {
       const response = await fetch(
-        "http://localhost:7000/api/categories/getAllCategories"
+        "https://restraunt-app-backend.onrender.com/api/categories/getAllCategories"
       );
       const result = await response.json();
       if (!response.ok) {

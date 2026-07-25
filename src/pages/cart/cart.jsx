@@ -43,7 +43,7 @@ const Cart = ({ theme }) => {
     setLoadingHistory(true);
     try {
       const response = await fetch(
-        `http://localhost:7000/api/orders/user/${user._id}?page=${page}&limit=4`
+        `https://restraunt-app-backend.onrender.com/api/orders/user/${user._id}?page=${page}&limit=4`
       );
       const result = await response.json();
       if (response.ok && result.data) {
@@ -84,7 +84,7 @@ const Cart = ({ theme }) => {
         image: item.image || "/picture1.jpg",
       }));
 
-      const response = await fetch("http://localhost:7000/api/orders/create", {
+      const response = await fetch("https://restraunt-app-backend.onrender.com/api/orders/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,7 +210,7 @@ const Cart = ({ theme }) => {
             <div className="flex gap-4">
               <button
                 disabled={submitting}
-                onClick={() => setShowPopup(false)}
+                onClick={() => setShowPopup(false) }
                 className="flex-1 py-3 rounded-xl bg-gray-500 text-white font-semibold hover:bg-gray-600 transition"
               >
                 Cancel
@@ -218,7 +218,11 @@ const Cart = ({ theme }) => {
 
               <button
                 disabled={submitting}
-                onClick={handlePlaceOrder}
+                onClick={() => {
+  handlePlaceOrder();
+  navigate("/home/customerdashboard");
+}}
+                
                 className="flex-1 py-3 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 transition disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {submitting ? "Placing..." : "Confirm & Place"}

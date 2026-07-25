@@ -3,11 +3,6 @@ import {
   Phone,
   Mail,
   Clock,
-  // Facebook,
-  // Instagram,
-  // Twitter,
-  // Youtube,
-  Send,
 } from "lucide-react";
 
 import { useOutletContext } from "react-router-dom";
@@ -24,8 +19,6 @@ export default function Contact() {
         backgroundImage: "url('/hero-light.jpg')",
       }}
     >
-      {/* Overlay */}
-
       <div
         className={`absolute inset-0 ${
           isDark ? "bg-black/80" : "bg-black/55"
@@ -33,8 +26,6 @@ export default function Contact() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-
-        {/* Heading */}
 
         <div className="text-center">
 
@@ -71,11 +62,8 @@ export default function Contact() {
 
         </div>
 
-        {/* Contact Cards */}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-16">
 
-          {/* Address */}
 
           <div
             className={`group rounded-3xl p-8 backdrop-blur-xl border transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
@@ -112,7 +100,6 @@ export default function Contact() {
 
           </div>
 
-          {/* Phone */}
 
           <div
             className={`group rounded-3xl p-8 backdrop-blur-xl border transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
@@ -145,8 +132,6 @@ export default function Contact() {
 
            
           </div>
-
-          {/* Email */}
 
           <div
             className={`group rounded-3xl p-8 backdrop-blur-xl border transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
@@ -363,26 +348,9 @@ export default function Contact() {
                         : "text-gray-700"
                     }
                   >
-                    10:00 AM - 10:00 PM
+                    9:00 AM - 8:00 PM
                   </p>
-                  <p
-                    className={
-                      isDark
-                        ? "text-gray-400"
-                        : "text-gray-600"
-                    }
-                  >
-                    Saturday - Sunday
-                  </p>
-                  <p
-                    className={
-                      isDark
-                        ? "text-gray-300"
-                        : "text-gray-700"
-                    }
-                  >
-                    9:00 AM - 11:30 PM
-                  </p>
+                 
                 </div>
               </div>
             </div>
@@ -395,110 +363,17 @@ export default function Contact() {
             }`}
           >
             <iframe
-              title="Restaurant Location"
-              src="https://www.google.com/maps?q=India+Gate+New+Delhi&output=embed"
-              className="w-full h-[500px]"
-              loading="lazy"
-            ></iframe>
+  title="Restaurant Location"
+  src="https://www.google.com/maps?q=India+Gate+New+Delhi&output=embed"
+  className="w-full h-[500px] rounded-2xl border-0 shadow-lg"
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="no-referrer-when-downgrade"
+></iframe>
           </div>
         </div>
-        <div
-          className={`mt-20 rounded-[35px] overflow-hidden shadow-2xl border ${
-            isDark
-              ? "bg-gradient-to-r from-[#1b1b1b] to-[#111827] border-[#D6B56C]/30"
-              : "bg-gradient-to-r from-orange-50 to-amber-100 border-orange-200"
-          }`}
-        >
-          <div className="grid lg:grid-cols-2 items-center">
-            <div className="p-10">
-              <h2
-                className={`text-4xl font-bold ${
-                  isDark
-                    ? "text-[#D6B56C]"
-                    : "text-[#8a4b12]"
-                }`}
-              >
-                Stay Updated 🍽️
-              </h2>
-              <p
-                className={`mt-5 leading-8 ${
-                  isDark
-                    ? "text-gray-300"
-                    : "text-gray-600"
-                }`}
-              >
-                Subscribe to receive exclusive discounts,
-                seasonal menus, exciting events and special
-                offers directly in your inbox.
-              </p>
-            </div>
-            <div className="p-10">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className={`flex-1 rounded-xl px-5 py-4 outline-none border ${
-                    isDark
-                      ? "bg-[#242424] border-gray-700 text-white"
-                      : "bg-white border-orange-200"
-                  }`}
-                />
-                <button
-                  className={`rounded-xl px-8 py-4 font-semibold transition-all duration-300 hover:scale-105 ${
-                    isDark
-                      ? "bg-[#D6B56C] text-black hover:bg-[#e8c97d]"
-                      : "bg-[#8a4b12] text-white hover:bg-[#6f3c11]"
-                  }`}
-                >
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-20 flex flex-wrap justify-center gap-8">
-          {[
-            {
-              // icon: <Facebook />,
-              name: "Facebook",
-            },
-            {
-              // icon: <Instagram />,
-              name: "Instagram",
-            },
-            {
-              // icon: <Twitter />,
-              name: "Twitter",
-            },
-            {
-              // icon: <Youtube />,
-              name: "YouTube",
-            },
-          ].map((social, index) => (
-
-            <div
-              key={index}
-              className={`group flex flex-col items-center justify-center rounded-3xl w-40 h-40 cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
-                isDark
-                  ? "bg-[#1c1c1c] hover:bg-[#D6B56C] text-white hover:text-black"
-                  : "bg-white hover:bg-[#8a4b12] text-[#8a4b12] hover:text-white"
-              }`}
-            >
-              <div className="text-4xl transition-transform duration-500 group-hover:scale-125">
-                {social.icon}
-              </div>
-
-              <p className="mt-4 font-semibold">
-                {social.name}
-              </p>
-            </div>
-
-          ))}
-
-        </div>
-
-        {/* Footer */}
-
+        
+           
         <div
           className={`mt-20 border-t pt-10 flex flex-col md:flex-row justify-between items-center gap-6 ${
             isDark
@@ -507,7 +382,6 @@ export default function Contact() {
           }`}
         >
           <div>
-
             <h2
               className={`text-2xl font-bold ${
                 isDark
@@ -527,9 +401,7 @@ export default function Contact() {
             >
               Fine Dining • Premium Taste • Luxury Experience
             </p>
-
           </div>
-
           <div
             className={`text-center ${
               isDark

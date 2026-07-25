@@ -7,7 +7,7 @@ import ScrollTop from "../commoncomponents/scrollTop";
 import useAuthStore from "../store/customerlogin";
 
 const Common = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const customerlogin = useAuthStore((state) => state.customerlogin);
   const user = JSON.parse(localStorage.getItem("customer"));
 

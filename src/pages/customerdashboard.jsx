@@ -35,8 +35,6 @@ const CustomerDashboard = () => {
   useEffect(() => {
     fetchWishlist();
   }, []);
-
-  // Paginated Table Booking History State
   const [bookingHistory, setBookingHistory] = useState([]);
   const [historyPage, setHistoryPage] = useState(1);
   const [historyPagination, setHistoryPagination] = useState({
@@ -46,8 +44,6 @@ const CustomerDashboard = () => {
     totalPages: 1,
   });
   const [loadingBookings, setLoadingBookings] = useState(false);
-
-  // Paginated Food Orders History State
   const [foodOrders, setFoodOrders] = useState([]);
   const [orderPage, setOrderPage] = useState(1);
   const [orderPagination, setOrderPagination] = useState({
@@ -64,7 +60,7 @@ const CustomerDashboard = () => {
       setLoadingBookings(true);
       try {
         const response = await fetch(
-          `http://localhost:7000/api/bookings/user/${user._id}?page=${historyPage}&limit=4`
+          `https://restraunt-app-backend.onrender.com/api/bookings/user/${user._id}?page=${historyPage}&limit=4`
         );
         const result = await response.json();
         if (response.ok && result.data) {
@@ -88,7 +84,7 @@ const CustomerDashboard = () => {
       setLoadingOrders(true);
       try {
         const response = await fetch(
-          `http://localhost:7000/api/orders/user/${user._id}?page=${orderPage}&limit=4`
+          `https://restraunt-app-backend.onrender.com/api/orders/user/${user._id}?page=${orderPage}&limit=4`
         );
         const result = await response.json();
         if (response.ok && result.data) {
@@ -125,41 +121,33 @@ const CustomerDashboard = () => {
       icon: Heart,
       color: "bg-red-500",
     },
-    {
-      title: "Reward Points",
-      value: "450",
-      icon: Award,
-      color: "bg-yellow-500",
-    },
   ];
-
   const categories = [
     {
       title: "Pizza",
       icon: Pizza,
-      image: "/pizza.jpg",
-      path: "/home/menu",
+      image: "/appetizers/pizza.jpg",
+      path: "/home/appetizers",
     },
     {
       title: "Coffee",
       icon: Coffee,
-      image: "/coffee.jpg",
-      path: "/home/menu",
+      image: "/coffee/coldcoffee.jpeg",
+      path: "/home/coffee",
     },
     {
       title: "Desserts",
       icon: IceCream,
-      image: "/dessert.jpg",
-      path: "/home/menu",
+      image: "/menuitems/desserts.jpeg",
+      path: "/home/desserts",
     },
     {
       title: "Soup",
       icon: Soup,
-      image: "/soup.jpg",
-      path: "/home/menu",
+      image: "/menuitems/soup.jpeg",
+      path: "/home/soup",
     },
   ];
-
   return (
     <section
       className={`min-h-screen transition-all duration-500 ${
@@ -168,8 +156,6 @@ const CustomerDashboard = () => {
           : "bg-[#fdf8f0] text-[#3c2415]"
       }`}
     >
-      {/* ================= HERO ================= */}
-
       <section
         className="relative h-[520px] bg-cover bg-center flex items-center"
         style={{
@@ -177,26 +163,20 @@ const CustomerDashboard = () => {
         }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
-
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <div className="max-w-2xl">
-
             <p className="uppercase tracking-[6px] text-[#D6B56C] font-semibold">
               Welcome Back
             </p>
-
             <h1 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-white">
               Hello Customer 👋
             </h1>
-
             <p className="mt-8 text-lg text-gray-200 leading-9">
               Enjoy premium dining experiences, discover delicious meals,
               reserve your favorite table, and earn exciting rewards every
               time you order.
             </p>
-
             <div className="flex flex-wrap gap-5 mt-12">
-
               <button
                 onClick={() => navigate("/home/menu")}
                 className="px-8 py-4 rounded-full font-semibold bg-[#D6B56C]
@@ -205,7 +185,6 @@ const CustomerDashboard = () => {
               >
                 Order Food
               </button>
-
               <button
                 onClick={() => navigate("/home/booking")}
                 className="px-8 py-4 rounded-full border-2 border-white
@@ -214,22 +193,16 @@ const CustomerDashboard = () => {
               >
                 Book Table
               </button>
-
             </div>
-
           </div>
         </div>
       </section>
-
-      {/* ================= STATISTICS ================= */}
-
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 -mt-20 relative z-20">
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
-
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 -mt-20
+       relative z-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 
+        gap-8">
           {stats.map((item, index) => {
             const Icon = item.icon;
-
             return (
               <div
                 key={index}
@@ -247,11 +220,9 @@ const CustomerDashboard = () => {
                 >
                   <Icon size={30} />
                 </div>
-
                 <h2 className="mt-6 text-4xl font-bold">
                   {item.value}
                 </h2>
-
                 <p
                   className={`mt-2 ${
                     isDark ? "text-gray-400" : "text-gray-600"
@@ -262,24 +233,16 @@ const CustomerDashboard = () => {
               </div>
             );
           })}
-
         </div>
       </section>
-
-      {/* ================= CATEGORIES ================= */}
-
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
-
         <div className="text-center">
-
           <p className="uppercase tracking-[5px] text-[#D6B56C] font-semibold">
             Categories
           </p>
-
           <h2 className="text-5xl font-bold mt-4">
             Explore Our Menu
           </h2>
-
           <p
             className={`mt-5 max-w-2xl mx-auto ${
               isDark ? "text-gray-400" : "text-gray-600"
@@ -288,14 +251,19 @@ const CustomerDashboard = () => {
             Discover a wide range of delicious dishes carefully prepared
             by our expert chefs.
           </p>
-
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => navigate("/home/menu")}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#D6B56C] px-6 py-3 text-sm font-semibold text-black shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-yellow-400/30 sm:px-8 sm:py-4 sm:text-base"
+            >
+              Explore Menu
+              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+            </button>
+          </div>
         </div>
-
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-8 mt-16">
-
           {categories.map((item, index) => {
             const Icon = item.icon;
-
             return (
               <div
                 key={index}
@@ -308,7 +276,6 @@ const CustomerDashboard = () => {
                     : "bg-white border-orange-100"
                 }`}
               >
-
                 <div className="overflow-hidden">
                   <img
                     src={item.image}
@@ -317,134 +284,28 @@ const CustomerDashboard = () => {
                     group-hover:scale-110 transition-all duration-700"
                   />
                 </div>
-
                 <div className="p-6">
-
                   <div className="flex items-center justify-between">
-
                     <div>
-
                       <Icon
                         size={34}
                         className="text-[#D6B56C]"
                       />
-
                       <h3 className="mt-5 text-2xl font-bold">
                         {item.title}
                       </h3>
-
                     </div>
-
                     <ArrowRight
                       className="group-hover:translate-x-2
                       transition-all text-[#D6B56C]"
                     />
-
                   </div>
-
                 </div>
-
               </div>
             );
           })}
-
         </div>
-
       </section>
-            {/* ================= TODAY'S SPECIAL + REWARD ================= */}
-
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-
-        <div className="grid lg:grid-cols-3 gap-8">
-
-          {/* Today's Offer */}
-
-          <div
-            className="lg:col-span-2 rounded-[35px] overflow-hidden relative
-            h-[420px] shadow-2xl"
-          >
-            <img
-              src="/offer.jpg"
-              alt="offer"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-
-            <div className="absolute inset-0 bg-black/60"></div>
-
-            <div className="relative z-10 h-full flex flex-col justify-center p-10">
-
-              <span className="uppercase tracking-[5px] text-[#D6B56C] font-semibold">
-                Today's Special
-              </span>
-
-              <h2 className="text-white text-5xl font-bold mt-4">
-                Flat 20% OFF
-              </h2>
-
-              <p className="mt-6 text-gray-200 text-lg max-w-xl leading-9">
-                Enjoy our chef's signature dishes today and receive an
-                exclusive discount on every premium order.
-              </p>
-
-              <button
-                onClick={() => navigate("/home/menu")}
-                className="mt-10 w-fit px-8 py-4 rounded-full
-                bg-[#D6B56C] text-black font-semibold
-                hover:scale-105 transition"
-              >
-                Order Now
-              </button>
-
-            </div>
-          </div>
-
-          {/* Reward */}
-
-          <div
-            className={`rounded-[35px] p-8 border flex flex-col justify-center
-            ${
-              isDark
-                ? "bg-[#171717] border-gray-700"
-                : "bg-white border-orange-100"
-            }`}
-          >
-
-            <Award
-              size={70}
-              className="text-[#D6B56C]"
-            />
-
-            <h2 className="text-3xl font-bold mt-6">
-              Reward Points
-            </h2>
-
-            <h1 className="text-6xl mt-5 font-bold text-[#D6B56C]">
-              450
-            </h1>
-
-            <p
-              className={`mt-6 leading-8 ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              Earn points every time you place an order and redeem
-              exciting discounts on future meals.
-            </p>
-
-            <button
-              className="mt-8 rounded-full py-4 bg-[#D6B56C]
-              text-black font-semibold hover:scale-105 transition"
-            >
-              Redeem Now
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* Recent Food Orders Section with Pagination */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8 border-b pb-4 border-gray-700/30">
           <div>
@@ -453,15 +314,13 @@ const CustomerDashboard = () => {
             </p>
             <h2 className="text-3xl font-bold mt-1">Recent Food Orders</h2>
           </div>
-
           <button
-            onClick={() => navigate("/home/cart")}
+            onClick={() => navigate("/home/cartsummary")}
             className="px-6 py-2.5 rounded-full bg-[#D6B56C] text-black font-semibold hover:scale-105 transition text-sm shadow-md"
           >
-            View Cart & All Orders →
+            View Cart 
           </button>
         </div>
-
         {loadingOrders ? (
           <div className="py-12 text-center text-sm text-gray-400 flex items-center justify-center gap-2">
             <RefreshCw className="w-5 h-5 animate-spin text-[#D6B56C]" />
@@ -491,7 +350,6 @@ const CustomerDashboard = () => {
                       {order.status}
                     </span>
                   </div>
-
                   <div className="flex flex-wrap gap-2 text-xs text-gray-400">
                     {order.items?.map((item, idx) => (
                       <span key={idx} className="bg-white/5 px-2.5 py-1 rounded-lg border border-gray-700/50 text-gray-300 font-medium">
@@ -499,7 +357,6 @@ const CustomerDashboard = () => {
                       </span>
                     ))}
                   </div>
-
                   <div className="flex items-center justify-between pt-3 border-t border-gray-700/20 text-xs">
                     <span className="text-gray-400">
                       {order.createdAt ? new Date(order.createdAt).toLocaleDateString() : "N/A"}
@@ -511,8 +368,6 @@ const CustomerDashboard = () => {
                 </div>
               ))}
             </div>
-
-            {/* Pagination Controls */}
             {orderPagination.totalPages > 1 && (
               <div className="flex items-center justify-between pt-4 text-xs">
                 <button
@@ -523,12 +378,10 @@ const CustomerDashboard = () => {
                   <ChevronLeft className="w-4 h-4" />
                   Previous
                 </button>
-
                 <span className="font-semibold text-gray-400">
                   Page <strong className="text-[#D6B56C]">{orderPagination.page}</strong> of{" "}
                   <strong>{orderPagination.totalPages}</strong>
                 </span>
-
                 <button
                   disabled={!orderPagination.hasNextPage || loadingOrders}
                   onClick={() => setOrderPage((prev) => prev + 1)}
@@ -542,9 +395,7 @@ const CustomerDashboard = () => {
           </div>
         )}
       </section>
-
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-
         <div
           className={`grid lg:grid-cols-2 gap-8 rounded-[35px] overflow-hidden border ${
             isDark
@@ -553,15 +404,12 @@ const CustomerDashboard = () => {
           }`}
         >
           <div className="p-10 flex flex-col justify-center">
-
             <p className="uppercase tracking-[5px] text-[#D6B56C] font-semibold">
               Reserve Table
             </p>
-
             <h2 className="text-5xl font-bold mt-5">
               Book Your Dining Experience
             </h2>
-
             <p
               className={`mt-6 leading-9 ${
                 isDark ? "text-gray-400" : "text-gray-600"
@@ -570,7 +418,6 @@ const CustomerDashboard = () => {
               Reserve your table in advance and enjoy a premium dining
               experience with family and friends.
             </p>
-
             <button
               onClick={() => navigate("/home/booking")}
               className="mt-10 w-fit px-8 py-4 rounded-full bg-[#D6B56C]
@@ -578,19 +425,9 @@ const CustomerDashboard = () => {
             >
               Book Table
             </button>
-
           </div>
-
-          <img
-            src="/booking.jpg"
-            alt="booking"
-            className="w-full h-[420px] object-cover"
-          />
         </div>
-
       </section>
-
-      {/* Table Booking History Section */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
         <div
           className={`p-8 sm:p-10 rounded-[35px] border ${
@@ -611,7 +448,6 @@ const CustomerDashboard = () => {
               + Book New Table
             </button>
           </div>
-
           {loadingBookings ? (
             <div className="py-12 text-center text-sm text-gray-400 flex items-center justify-center gap-2">
               <RefreshCw className="w-5 h-5 animate-spin text-[#D6B56C]" />
@@ -665,8 +501,6 @@ const CustomerDashboard = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Pagination Controls */}
               {historyPagination.totalPages > 1 && (
                 <div className="flex items-center justify-between pt-6 border-t border-gray-700/30 text-xs">
                   <button
@@ -677,12 +511,10 @@ const CustomerDashboard = () => {
                     <ChevronLeft className="w-4 h-4" />
                     Previous
                   </button>
-
                   <span className="font-semibold text-gray-400">
                     Page <strong className="text-[#D6B56C]">{historyPagination.page}</strong> of{" "}
                     <strong>{historyPagination.totalPages}</strong>
                   </span>
-
                   <button
                     disabled={!historyPagination.hasNextPage || loadingBookings}
                     onClick={() => setHistoryPage((prev) => prev + 1)}
@@ -697,9 +529,6 @@ const CustomerDashboard = () => {
           )}
         </div>
       </section>
-
-
-      {/* Wishlist Section */}
       <section className={`py-24 ${isDark ? "bg-[#171717]" : "bg-white"}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -718,7 +547,6 @@ const CustomerDashboard = () => {
               View Full Wishlist →
             </button>
           </div>
-
           {wishlistItems.length === 0 ? (
             <div className={`mt-12 p-10 rounded-3xl text-center border text-sm ${isDark ? "bg-[#0f172a] border-gray-800 text-gray-400" : "bg-[#fdf8f0] border-amber-100 text-gray-500"}`}>
               No favourite dishes added yet. Browse our menu and click ❤️ to add items to your wishlist!
@@ -749,7 +577,6 @@ const CustomerDashboard = () => {
                       ₹{item.price}
                     </p>
                   </div>
-
                   <button
                     onClick={() => {
                       addToCart(item);
@@ -765,112 +592,8 @@ const CustomerDashboard = () => {
           )}
         </div>
       </section>
-
-
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
-
-        <div className="text-center">
-
-          <p className="uppercase tracking-[5px] text-[#D6B56C] font-semibold">
-            Testimonials
-          </p>
-
-          <h2 className="text-5xl font-bold mt-5">
-            What Our Customers Say
-          </h2>
-
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 mt-16">
-
-          {[
-            {
-              name: "Sophia",
-              review:
-                "Amazing food and excellent customer service. Highly recommended!",
-            },
-            {
-              name: "James",
-              review:
-                "Beautiful ambience and delicious dishes. Will definitely visit again.",
-            },
-            {
-              name: "Emily",
-              review:
-                "One of the best restaurants I've ever visited. Everything was perfect.",
-            },
-          ].map((review, index) => (
-            <div
-              key={index}
-              className={`rounded-3xl border p-8 ${
-                isDark
-                  ? "bg-[#171717] border-gray-700"
-                  : "bg-white border-orange-100"
-              }`}
-            >
-              <div className="text-yellow-400 text-2xl">
-                ⭐⭐⭐⭐⭐
-              </div>
-
-              <p
-                className={`mt-6 leading-8 ${
-                  isDark ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
-                "{review.review}"
-              </p>
-
-              <h3 className="mt-8 text-xl font-bold">
-                — {review.name}
-              </h3>
-
-            </div>
-          ))}
-
-        </div>
-
-      </section>
-
-
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-
-        <div
-          className="rounded-[35px] bg-gradient-to-r from-[#D6B56C]
-          to-yellow-500 text-center py-20 px-8"
-        >
-
-          <h2 className="text-5xl font-bold text-black">
-            Stay Updated
-          </h2>
-
-          <p className="mt-6 text-lg text-black max-w-2xl mx-auto">
-            Subscribe to receive the latest offers, exclusive discounts,
-            and exciting restaurant news.
-          </p>
-
-          <div className="flex flex-col md:flex-row justify-center gap-5 mt-10">
-
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="px-6 py-4 rounded-full outline-none w-full md:w-[420px]"
-            />
-
-            <button
-              className="px-8 py-4 rounded-full bg-black text-white
-              hover:scale-105 transition"
-            >
-              Subscribe
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
+      
     </section>
   );
 };
-
 export default CustomerDashboard;

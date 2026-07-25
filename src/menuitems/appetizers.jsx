@@ -14,7 +14,7 @@ function NextArrow({ onClick }) {
     <button
       onClick={onClick}
       className="
-      absolute -right-8 top-1/2
+      absolute -right-3 top-1/2
       -translate-y-1/2
       z-20
       w-12 h-12
@@ -38,7 +38,7 @@ function PrevArrow({ onClick }) {
     <button
       onClick={onClick}
       className="
-      absolute -left-8 top-1/2
+      absolute -left-3 top-1/2
       -translate-y-1/2
       z-20
       w-12 h-12
@@ -74,7 +74,7 @@ const Appetizers = () => {
   useEffect(() => {
     const fetchSubcategories = async () => {
       try {
-        const response = await fetch("http://localhost:7000/api/subcategories/getAll");
+        const response = await fetch("https://restraunt-app-backend.onrender.com/api/subcategories/getAll");
         const result = await response.json();
         if (response.ok && result.data) {
           const filtered = result.data.filter(
@@ -86,7 +86,7 @@ const Appetizers = () => {
             image: sub.image.startsWith("http")
               ? sub.image
               : sub.image.startsWith("/uploads") || sub.image.startsWith("uploads")
-              ? `http://localhost:7000${sub.image.startsWith("/") ? "" : "/"}${sub.image}`
+              ? `https://restraunt-app-backend.onrender.com${sub.image.startsWith("/") ? "" : "/"}${sub.image}`
               : sub.image,
             price: Number(sub.prices || 0),
             quantity: sub.quantity || 1,
@@ -106,7 +106,7 @@ const Appetizers = () => {
     dots: true,
     infinite: true,
     speed: 700,
-    slidesToShow: 2.7,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,

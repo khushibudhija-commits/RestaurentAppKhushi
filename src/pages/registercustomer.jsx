@@ -87,7 +87,7 @@ const RegisterCustomer = ({ theme = "light" }) => {
       setError("");
 
       const response = await fetch(
-        "http://localhost:7000/api/users/register",
+        "https://restraunt-app-backend.onrender.com/api/users/register",
         {
           method: "POST",
           headers: {

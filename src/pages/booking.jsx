@@ -106,7 +106,7 @@ const Booking = () => {
     setLoadingTables(true);
     try {
       const response = await fetch(
-        "http://localhost:7000/api/bookings/getcollections"
+        "https://restraunt-app-backend.onrender.com/api/bookings/getcollections"
       );
       const result = await response.json();
       if (response.ok && result.data) {
@@ -134,7 +134,7 @@ const Booking = () => {
     setLoadingHistory(true);
     try {
       const response = await fetch(
-        `http://localhost:7000/api/bookings/user/${user._id}?page=${page}&limit=5`
+        `https://restraunt-app-backend.onrender.com/api/bookings/user/${user._id}?page=${page}&limit=5`
       );
       const result = await response.json();
       if (response.ok && result.data) {
@@ -174,7 +174,7 @@ const Booking = () => {
     setSubmitting(true);
     try {
       const response = await fetch(
-        "http://localhost:7000/api/bookings/bookTable",
+        "https://restraunt-app-backend.onrender.com/api/bookings/bookTable",
         {
           method: "POST",
           headers: {
@@ -217,7 +217,6 @@ const Booking = () => {
         isDark ? "bg-black/80" : ""
       }`}
     >
-      {/* Success Modal */}
       {successBooking && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div
@@ -278,7 +277,6 @@ const Booking = () => {
         </div>
       )}
 
-      {/* Confirmation Modal */}
       {showPopup && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div
