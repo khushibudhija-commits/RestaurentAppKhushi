@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import { useOutletContext, useNavigate } from "react-router-dom";
@@ -6,29 +5,30 @@ const Menu = () => {
   const { theme } = useOutletContext();
   const isDark = theme === "dark";
   const navigate = useNavigate();
- const [menu, setMenu] = useState([]);
-const [filteredMenu, setFilteredMenu] = useState([]);
-const [search, setSearch] = useState("");
-const [debouncedValue, setDebouncedValue] = useState("");
-useEffect(() => {
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(
-        "https://restraunt-app-backend.onrender.com/api/categories/getAllCategories"
-      );
-      const result = await response.json();
-      if (!response.ok) {
-        alert(result.message);
-        return;
+  const [menu, setMenu] = useState([]);
+  const [filteredMenu, setFilteredMenu] = useState([]);
+  const [search, setSearch] = useState("");
+  const [debouncedValue, setDebouncedValue] = useState("");
+  
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await fetch(
+         import.meta.env.VITE_BACKEND_URL+ "/api/categories/getAllCategories",
+        );
+        const result = await response.json();
+        if (!response.ok) {
+          alert(result.message);
+          return;
+        }
+        setMenu(result.data);
+        setFilteredMenu(result.data);
+      } catch (error) {
+        console.log(error);
       }
-      setMenu(result.data);
-      setFilteredMenu(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchMenu();
-}, []);
+    };
+    fetchMenu();
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedValue(search);
@@ -37,15 +37,15 @@ useEffect(() => {
     return () => clearTimeout(timer);
   }, [search]);
   useEffect(() => {
-  if (!debouncedValue.trim()) {
-    setFilteredMenu(menu);
-    return;
-  }
-  const filtered = menu.filter((item) =>
-    item.name.toLowerCase().includes(debouncedValue.toLowerCase())
-  );
-  setFilteredMenu(filtered);
-}, [debouncedValue, menu]);
+    if (!debouncedValue.trim()) {
+      setFilteredMenu(menu);
+      return;
+    }
+    const filtered = menu.filter((item) =>
+      item.name.toLowerCase().includes(debouncedValue.toLowerCase()),
+    );
+    setFilteredMenu(filtered);
+  }, [debouncedValue, menu]);
   return (
     <section
       className={`py-16 px-6 transition-all duration-500 ${
@@ -139,51 +139,51 @@ useEffect(() => {
                   </h3>
                   <button
                     onClick={() => {
-  switch (item.name) {
-    case "APPETIZERS":
-      navigate("/home/appetizers");
-      break;
+                      switch (item.name) {
+                        case "APPETIZERS":
+                          navigate("/home/appetizers");
+                          break;
 
-    case "DRINKS":
-      navigate("/home/drinks");
-      break;
+                        case "DRINKS":
+                          navigate("/home/drinks");
+                          break;
 
-    case "SOUP":
-      navigate("/home/soup");
-      break;
+                        case "SOUP":
+                          navigate("/home/soup");
+                          break;
 
-    case "SALAD":
-      navigate("/home/salad");
-      break;
+                        case "SALAD":
+                          navigate("/home/salad");
+                          break;
 
-    case "COFFEE":
-      navigate("/home/coffee");
-      break;
+                        case "COFFEE":
+                          navigate("/home/coffee");
+                          break;
 
-    case "DESSERTS":
-      navigate("/home/desserts");
-      break;
+                        case "DESSERTS":
+                          navigate("/home/desserts");
+                          break;
 
-    case "CAKES":
-      navigate("/home/cakes");
-      break;
+                        case "CAKES":
+                          navigate("/home/cakes");
+                          break;
 
-    case "ROTI":
-      navigate("/home/roti");
-      break;
+                        case "ROTI":
+                          navigate("/home/roti");
+                          break;
 
-    case "ICONIC CURD DISHES":
-      navigate("/home/curddishes");
-      break;
+                        case "ICONIC CURD DISHES":
+                          navigate("/home/curddishes");
+                          break;
 
-    case "CLASSIC INDIAN SABJI COLLECTION":
-      navigate("/home/sabji");
-      break;
+                        case "CLASSIC INDIAN SABJI COLLECTION":
+                          navigate("/home/sabji");
+                          break;
 
-    default:
-      console.log("No route found");
-  }
-}}
+                        default:
+                          console.log("No route found");
+                      }
+                    }}
                     className={`w-full py-3 rounded-lg font-semibold cursor-pointer transition-all duration-300 ${
                       isDark
                         ? "bg-[#D6B56C] text-black hover:bg-[#e8c97d] hover:shadow-lg hover:shadow-[#D6B56C]/40"

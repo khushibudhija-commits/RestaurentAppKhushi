@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 export default function Footer({ theme = "light" }) {
   const isDark = theme === "dark";
   const socialLinks = [
-    { image: "/socialmedia/instagram.png", label: "Instagram", url: "https://www.instagram.com" },
-    { image: "/socialmedia/facebook.png", label: "Facebook", url: "https://www.facebook.com" },
-    { image: "/socialmedia/youtube.png", label: "YouTube", url: "https://www.youtube.com" },
-    { image: "/socialmedia/linkedin.png", label: "LinkedIn", url: "https://www.linkedin.com" },
+    { image: "/socialmedia/instagram.svg", label: "Instagram", url: "https://www.instagram.com" },
+    { image: "/socialmedia/facebook.svg", label: "Facebook", url: "https://www.facebook.com" },
+    { image: "/socialmedia/youtube.svg", label: "YouTube", url: "https://www.youtube.com" },
+    { image: "/socialmedia/linkedin.svg", label: "LinkedIn", url: "https://www.linkedin.com" },
   ];
 
   return (

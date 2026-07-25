@@ -99,22 +99,8 @@ const CustomerLogin = ({ theme = "light" }) => {
 
         <div className="px-8 py-8">
 
-          <div className="flex justify-center">
-            <img
-              src={isDark ? "/logo-dark.png" : "/logo.png"}
-              alt="logo"
-              className="w-24 object-contain drop-shadow-xl"
-            />
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <div className="w-20 h-20 rounded-full bg-[#D6B56C] flex items-center justify-center shadow-xl">
-              <LogIn
-                size={36}
-                className="text-black"
-              />
-            </div>
-          </div>
+          
+         
 
 
           <h1

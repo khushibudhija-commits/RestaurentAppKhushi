@@ -1,10 +1,14 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { User, Mail, Lock, UtensilsCrossed } from "lucide-react";
-
-const Input = ({
+import { useNavigate } from "react-router-dom";import {
+  User,
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  UtensilsCrossed,
+} from "lucide-react";const Input = ({
   label,
   icon: Icon,
   isDark,
@@ -16,6 +20,7 @@ const Input = ({
   max,
   ...rules
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="mb-4">
       <label
@@ -26,34 +31,59 @@ const Input = ({
         {label}
       </label>
 
-      <div
-        className={`flex items-center rounded-xl border transition-all duration-300 focus-within:ring-2 focus-within:ring-[#D6B56C]
-        ${
-          isDark
-            ? "border-gray-600 bg-[#232323]"
-            : "border-gray-300 bg-white"
-        }`}
-      >
-        <div className="px-4">
-          <Icon
-            size={20}
-            className={isDark ? "text-[#D6B56C]" : "text-[#8a4b12]"}
-          />
-        </div>
+    <div
+  className={`flex items-center rounded-xl border transition-all duration-300 focus-within:ring-2 focus-within:ring-[#D6B56C]
+  ${
+    isDark
+      ? "border-gray-600 bg-[#232323]"
+      : "border-gray-300 bg-white"
+  }`}
+>
+  <div className="px-4">
+    <Icon
+      size={20}
+      className={isDark ? "text-[#D6B56C]" : "text-[#8a4b12]"}
+    />
+  </div>
 
-        <input
-          type={type}
-          min={min}
-          max={max}
-          {...register(name, rules)}
-          className={`w-full rounded-r-xl bg-transparent px-2 py-3 outline-none
-          ${
-            isDark
-              ? "text-white placeholder-gray-400"
-              : "text-gray-800 placeholder-gray-400"
-          }`}
+  <input
+    type={
+      type === "password"
+        ? showPassword
+          ? "text"
+          : "password"
+        : type
+    }
+    min={min}
+    max={max}
+    {...register(name, rules)}
+    className={`w-full bg-transparent px-2 py-3 outline-none ${
+      isDark
+        ? "text-white placeholder-gray-400"
+        : "text-gray-800 placeholder-gray-400"
+    }`}
+  />
+
+  {type === "password" && (
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="px-4"
+    >
+      {showPassword ? (
+        <EyeOff
+          size={20}
+          className={isDark ? "text-[#D6B56C]" : "text-[#8a4b12]"}
         />
-      </div>
+      ) : (
+        <Eye
+          size={20}
+          className={isDark ? "text-[#D6B56C]" : "text-[#8a4b12]"}
+        />
+      )}
+    </button>
+  )}
+</div>
 
       <div className="min-h-[18px] mt-1">
         {errors[name] && (
@@ -68,7 +98,7 @@ const Input = ({
 
 const RegisterCustomer = ({ theme = "light" }) => {
   const navigate = useNavigate();
-
+const [showPassword, setShowPassword] = useState(false);
   const isDark = theme === "dark";
 
   const [error, setError] = useState("");
@@ -200,19 +230,19 @@ console.log(response.ok);
               </div>
             <div className="mt-2">
               <Input
-                icon={Lock}
-                isDark={isDark}
-                label="Password"
-                name="password"
-                type="password"
-                register={register}
-                errors={errors}
-                required="Password is required"
-                minLength={{
-                  value: 5,
-                  message: "Password must be at least 5 characters",
-                }}
-              />
+  icon={Lock}
+  isDark={isDark}
+  label="Password"
+  name="password"
+  type="password"
+  register={register}
+  errors={errors}
+  required="Password is required"
+  minLength={{
+    value: 5,
+    message: "Password must be at least 5 characters",
+  }}
+/>
             </div>
 
           
@@ -236,11 +266,11 @@ console.log(response.ok);
 
             </form>
 
-            <div className="my-6 flex items-center">
+            <div className=" flex items-center">
               <div className="h-px flex-1 bg-gray-300"></div>
 
               <span
-                className={`px-4 text-sm font-semibold ${
+                className={`px-4 mt-5 text-sm font-semibold ${
                   isDark ? "text-gray-400" : "text-gray-500"
                 }`}
               >
@@ -251,20 +281,29 @@ console.log(response.ok);
             </div>
             
             </div>
-                        <button
-              type="button"
-              onClick={() => navigate("/customerlogin")}
-              className={`w-full rounded-xl border py-3.5 text-lg font-semibold transition-all duration-300 hover:scale-[1.02]
-              ${
-                isDark
-                  ? "border-[#D6B56C] text-[#D6B56C] hover:bg-[#D6B56C] hover:text-black hover:shadow-lg hover:shadow-[#D6B56C]/30"
-                  : "border-[#8a4b12] text-[#8a4b12] hover:bg-[#8a4b12] hover:text-white hover:shadow-lg hover:shadow-orange-300"
-              }`}
-            >
-              Already have an account? Login
-            </button>
+         <div className=" flex justify-center">
+  <p
+    className={`flex items-center gap-2 rounded-full px-6 py-3 text-sm ${
+      isDark
+        ? "bg-[#232323] text-gray-300 border border-gray-700"
+        : "bg-orange-50 text-gray-600 border border-orange-200"
+    }`}
+  >
+    <span>Already have an account?</span>
 
-            <div className="mt-8 rounded-2xl border border-dashed border-[#D6B56C]/40 bg-gradient-to-r from-[#D6B56C]/10 to-transparent p-4 text-center">
+    <button
+      type="button"
+      onClick={() => navigate("/customerlogin")}
+      className={`font-semibold transition-all duration-300 hover:underline hover:scale-105 ${
+        isDark ? "text-[#D6B56C]" : "text-[#8a4b12]"
+      }`}
+    >
+      Login →
+    </button>
+  </p>
+</div>
+
+            <div className="rounded-2xl border border-dashed border-[#D6B56C]/40 bg-gradient-to-r from-[#D6B56C]/10 to-transparent p-4 text-center">
               <h3
                 className={`text-lg font-semibold ${
                   isDark ? "text-[#D6B56C]" : "text-[#8a4b12]"
