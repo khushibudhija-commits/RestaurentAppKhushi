@@ -4,14 +4,33 @@ import {
   Mail,
   Clock,
 } from "lucide-react";
-
+import { useRef } from "react";
 import { useOutletContext } from "react-router-dom";
-
+import emailjs from "@emailjs/browser";
 export default function Contact() {
   const { theme } = useOutletContext();
 
   const isDark = theme === "dark";
+const form = useRef();
+const sendEmail = (e) => {
+  e.preventDefault();
 
+  emailjs
+    .sendForm(
+      "service_15fzu3f",
+      "template_i8jx3fk",
+      form.current,
+      "8JOlAY7_-rAvON4Cl"
+    )
+    .then(() => {
+      alert("Feedback Sent Successfully!");
+      form.current.reset();
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Failed to send feedback.");
+    });
+};
   return (
     <section
       className="relative min-h-screen bg-cover bg-center bg-no-repeat"
@@ -372,8 +391,102 @@ export default function Contact() {
 ></iframe>
           </div>
         </div>
-        
-           
+<section
+      className={`min-h-screen py-28 px-6
+        mt-5 transition-all duration-500 ${
+        isDark
+          ? "bg-[#0f172a] text-white"
+          : "bg-[#fdf8f0] text-[#3c2415]"
+      }`}
+    >
+      <div
+        className={`max-w-3xl mx-auto rounded-3xl p-10 shadow-2xl ${
+          isDark ? "bg-[#1b1b1b]" : "bg-white"
+        }`}
+      >
+        <h1 className="text-4xl font-bold text-center mb-3">
+          Contact Us
+        </h1>
+
+        <p
+          className={`text-center mb-10 ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
+          We'd love to hear your feedback.
+        </p>
+
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className="space-y-6"
+        >
+          <div>
+            <label className="font-semibold">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              name="user_name"
+              required
+              placeholder="Enter your name"
+              className={`mt-2 w-full rounded-xl border px-4 py-3 outline-none transition-all
+              ${
+                isDark
+                  ? "bg-[#111827] border-gray-700 text-white"
+                  : "bg-white border-gray-300"
+              }`}
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              name="user_email"
+              required
+              placeholder="Enter your email"
+              className={`mt-2 w-full rounded-xl border px-4 py-3 outline-none transition-all
+              ${
+                isDark
+                  ? "bg-[#111827] border-gray-700 text-white"
+                  : "bg-white border-gray-300"
+              }`}
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold">
+              Feedback
+            </label>
+
+            <textarea
+              rows={6}
+              name="message"
+              required
+              placeholder="Write your feedback..."
+              className={`mt-2 w-full rounded-xl border px-4 py-3 outline-none resize-none transition-all
+              ${
+                isDark
+                  ? "bg-[#111827] border-gray-700 text-white"
+                  : "bg-white border-gray-300"
+              }`}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full rounded-xl py-4 bg-[#D6B56C] text-black font-semibold hover:scale-105 transition-all duration-300"
+          >
+            Send Feedback
+          </button>
+        </form>
+      </div>
+    </section>
         <div
           className={`mt-20 border-t pt-10 flex flex-col md:flex-row justify-between items-center gap-6 ${
             isDark
@@ -416,6 +529,7 @@ export default function Contact() {
         </div>
 
       </div>
+       
     </section>
   );
 }

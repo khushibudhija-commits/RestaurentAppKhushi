@@ -1,14 +1,15 @@
 
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer({ theme = "light" }) {
   const isDark = theme === "dark";
+  const socialLinks = [
+    { image: "/socialmedia/instagram.png", label: "Instagram", url: "https://www.instagram.com" },
+    { image: "/socialmedia/facebook.png", label: "Facebook", url: "https://www.facebook.com" },
+    { image: "/socialmedia/youtube.png", label: "YouTube", url: "https://www.youtube.com" },
+    { image: "/socialmedia/linkedin.png", label: "LinkedIn", url: "https://www.linkedin.com" },
+  ];
 
   return (
     <footer
@@ -140,7 +141,32 @@ export default function Footer({ theme = "light" }) {
            
           </div>
 
-          <div className="flex gap-4 mt-8">
+          <div className="mt-8">
+            <h4 className="text-sm font-semibold mb-3 text-[#D6B56C]">
+              Follow Us
+            </h4>
+            <div className="flex flex-wrap gap-3">
+              {socialLinks.map(({ image, label, url }) => (
+                <a
+                  key={label}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className={`rounded-full p-2 transition-all duration-300 hover:scale-110 ${
+                    isDark
+                      ? "bg-slate-800 hover:bg-slate-700"
+                      : "bg-[#f5e7c8] hover:bg-[#e8d3a4]"
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={label}
+                    className="h-6 w-6 rounded-full object-cover"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
